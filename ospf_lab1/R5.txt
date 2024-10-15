@@ -1,0 +1,25 @@
+
+create vlan "loopback5"
+enable loopback-mode vlan loopback5
+create vlan "VLAN_0040"
+configure vlan VLAN_0040 tag 40
+create vlan "VLAN_0050"
+configure vlan VLAN_0050 tag 50
+configure vlan Default add ports 1-12 untagged
+configure vlan VLAN_0040 add ports 1 tagged
+configure vlan VLAN_0050 add ports 2 tagged
+configure vlan loopback5 ipaddress 5.5.5.5 255.0.0.0
+enable ipforwarding vlan loopback5
+configure vlan VLAN_0040 ipaddress 10.0.24.1 255.255.255.252
+enable ipforwarding vlan VLAN_0040
+configure vlan VLAN_0050 ipaddress 10.0.44.2 255.255.255.252
+enable ipforwarding vlan VLAN_0050
+
+
+
+configure ospf routerid 5.5.5.5
+enable ospf
+create ospf area 0.0.0.1
+configure ospf add vlan VLAN_0040 area 0.0.0.1
+configure ospf add vlan VLAN_0050 area 0.0.0.1
+

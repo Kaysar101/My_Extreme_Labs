@@ -1,0 +1,6 @@
+
+create vlan "data"
+configure vlan data tag 101
+configure vlan data add ports 4 tagged
+configure vlan data add ports 10 untagged
+configure vlan Default add ports 1-9,11-12 untagged

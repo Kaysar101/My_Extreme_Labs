@@ -1,0 +1,29 @@
+
+create vlan "data"
+configure vlan data tag 101
+create vlan "loopback1"
+enable loopback-mode vlan loopback1
+create vlan "VLAN_0010"
+configure vlan VLAN_0010 tag 10
+create vlan "VLAN_0020"
+configure vlan VLAN_0020 tag 20
+configure vlan data add ports 1 tagged
+configure vlan data add ports 10 untagged
+configure vlan Default add ports 1-9,11-12 untagged
+configure vlan VLAN_0010 add ports 3 tagged
+configure vlan VLAN_0020 add ports 2 tagged
+configure vlan data ipaddress 203.0.113.1 255.255.255.0
+enable ipforwarding vlan data
+configure vlan loopback1 ipaddress 1.1.1.1 255.255.255.255
+enable ipforwarding vlan loopback1
+configure vlan VLAN_0010 ipaddress 10.0.12.1 255.255.255.252
+enable ipforwarding vlan VLAN_0010
+configure vlan VLAN_0020 ipaddress 10.0.13.1 255.255.255.252
+enable ipforwarding vlan VLAN_0020
+
+configure ospf routerid 1.1.1.1
+enable ospf
+create ospf area 0.0.0.1
+configure ospf add vlan data area 0.0.0.1 link-type point-to-point passive
+configure ospf add vlan VLAN_0010 area 0.0.0.1
+configure ospf add vlan VLAN_0020 area 0.0.0.1

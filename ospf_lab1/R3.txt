@@ -1,0 +1,24 @@
+
+create vlan "loopback3"
+enable loopback-mode vlan loopback3
+create vlan "VLAN_0020"
+configure vlan VLAN_0020 tag 20
+create vlan "VLAN_0030"
+configure vlan VLAN_0030 tag 30
+configure vlan Default add ports 1-12 untagged
+configure vlan VLAN_0020 add ports 2 tagged
+configure vlan VLAN_0030 add ports 3 tagged
+configure vlan loopback3 ipaddress 3.3.3.3 255.255.255.255
+enable ipforwarding vlan loopback3
+configure vlan VLAN_0020 ipaddress 10.0.13.2 255.255.255.252
+enable ipforwarding vlan VLAN_0020
+configure vlan VLAN_0030 ipaddress 10.0.34.1 255.255.255.252
+enable ipforwarding vlan VLAN_0030
+
+
+
+
+create ospf area 0.0.0.1
+configure ospf add vlan VLAN_0020 area 0.0.0.1
+configure ospf add vlan VLAN_0030 area 0.0.0.1
+enable ospf
