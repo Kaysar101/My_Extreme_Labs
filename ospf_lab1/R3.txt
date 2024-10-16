@@ -22,3 +22,5 @@ create ospf area 0.0.0.1
 configure ospf add vlan VLAN_0020 area 0.0.0.1
 configure ospf add vlan VLAN_0030 area 0.0.0.1
 enable ospf
+configure ospf add vlan VLAN_0020 area 0.0.0.1 link-type broadcast
+configure ospf add vlan VLAN_0030 area 0.0.0.1 link-type broadcast
