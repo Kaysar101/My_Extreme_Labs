@@ -6,7 +6,7 @@ configure vlan data add ports 1 tagged
 configure vlan data ipaddress 192.168.1.1 255.255.255.0
 
 
-enable dhcp vlan Default
+
 configure bootprelay add 192.168.1.1 vr VR-Default
 enable bootprelay ipv4 vr VR-Default
 configure vlan data dhcp-address-range 192.168.1.10 - 192.168.1.20
