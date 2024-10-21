@@ -1,0 +1,17 @@
+configure snmp sysName "R1"
+
+create vlan "data"
+configure vlan data tag 20
+configure vlan data add ports 1 tagged
+configure vlan Default add ports 1-12 untagged
+configure vlan data ipaddress 192.168.1.1 255.255.255.0
+
+
+enable dhcp vlan Default
+configure bootprelay add 192.168.1.1 vr VR-Default
+enable bootprelay ipv4 vr VR-Default
+configure vlan data dhcp-address-range 192.168.1.10 - 192.168.1.20
+configure vlan data dhcp-options default-gateway 192.168.1.1
+configure vlan data dhcp-options dns-server 8.8.8.8
+enable dhcp ports 1 vlan data
+
