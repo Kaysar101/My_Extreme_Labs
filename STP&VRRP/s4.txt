@@ -1,0 +1,16 @@
+
+create vlan "borealis"
+configure vlan borealis tag 10
+configure vlan borealis add ports 5,10 tagged
+configure vlan borealis add ports 1-2 untagged
+configure vlan Default add ports 3-12 untagged
+configure vlan borealis ipaddress 192.168.1.4 255.255.255.0
+
+create vrrp vlan borealis vrid 1
+configure vrrp vlan borealis vrid 1 priority 250
+configure vrrp vlan borealis vrid 1 host-mobility on
+configure vrrp vlan borealis vrid 1 add 192.168.2.254
+enable vrrp vlan borealis vrid 1
+
+ configure stpd s0 add vlan borealis ports 5,10 dot1d
+enable stpd s0
